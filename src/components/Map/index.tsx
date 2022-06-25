@@ -16,7 +16,7 @@ export const Map = ({
   style,
   ...rest
 }: MapProps) => {
-  const center = useRef(new window.naver.maps.LatLng(latitude, longitude));
+  const center = useRef(new naver.maps.LatLng(latitude, longitude));
   const ref = useRef<HTMLDivElement>(null);
   const init = useRef(false);
 
@@ -26,7 +26,7 @@ export const Map = ({
     if (!ref.current || init.current || map) return;
     init.current = true;
     setMap(
-      new window.naver.maps.Map(ref.current, {
+      new naver.maps.Map(ref.current, {
         center: center.current,
         zoom,
         ...rest,
