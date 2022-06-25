@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "es6",
     "module": "esnext",
-    "lib": ["es2020"],
+    "lib": ["es2020", "DOM"],
     "importHelpers": true,
     "downlevelIteration": true,
     "strict": true,
@@ -14,6 +14,7 @@
     "forceConsistentCasingInFileNames": true,
     "outDir": "./types",
     "declaration": true,
+    "jsx": "react",
     "baseUrl": "."
   },
   "include": ["src"],

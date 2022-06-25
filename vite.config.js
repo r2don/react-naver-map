@@ -19,4 +19,9 @@ module.exports = defineConfig({
     environment: "jsdom",
     coverage: { reporter: ["json"] },
   },
+  resolve: {
+    alias: {
+      src: path.resolve(__dirname, "src"),
+    },
+  },
 });
