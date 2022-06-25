@@ -18,6 +18,14 @@ export const useNaverMapInit: UseNaverMapInit = ({
     isError: false,
   });
 
+  if (typeof onLoad === "function" && initResult.isLoaded) {
+    onLoad();
+  }
+
+  if (typeof onError === "function" && initResult.isError) {
+    onError();
+  }
+
   useIsomorphicLayoutEffect(() => {
     if (!isClientSide) {
       setInitResult({ isLoaded: false, isError: false });
