@@ -1,5 +1,6 @@
-import { useLayoutEffect, useState } from "react";
+import { useState } from "react";
 import { isClientSide } from "src/utils";
+import { useIsomorphicLayoutEffect } from "../useIsomorphicLayoutEffect";
 import { SCRIPT_ID } from "./constants";
 import { Result, UseNaverMapInit } from "./types";
 import {
@@ -17,7 +18,7 @@ export const useNaverMapInit: UseNaverMapInit = ({
     isError: false,
   });
 
-  useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     if (!isClientSide) {
       setInitResult({ isLoaded: false, isError: false });
     }
