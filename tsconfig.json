@@ -13,7 +13,6 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "outDir": "./types",
-    "emitDeclarationOnly": true,
     "declaration": true,
     "baseUrl": "."
   },
