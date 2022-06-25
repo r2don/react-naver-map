@@ -1,30 +1,27 @@
 import { useState } from "react";
 import { isClientSide } from "src/utils";
-import { useIsomorphicLayoutEffect } from "../useIsomorphicLayoutEffect";
 import { SCRIPT_ID } from "./constants";
 import { InitResult, UseNaverMapInit } from "./types";
+import { useIsomorphicLayoutEffect } from "../useIsomorphicLayoutEffect";
 import {
   insertNaverMapScriptIntoHead,
   createNaverMapScriptByClientId,
 } from "./utils";
 
+/**
+ *
+ * @param onLoad - If 'onLoad' changes too often, wrap that definition in useCallback
+ * @param onError - If 'onError' changes too often, wrap that definition in useCallback
+ */
 export const useNaverMapInit: UseNaverMapInit = ({
   ncpClientId,
   onLoad,
   onError,
 }) => {
-  const [initResult, setInitResult] = useState<InitResult>({
+  const [{ isLoaded, isError }, setInitResult] = useState<InitResult>({
     isLoaded: false,
     isError: false,
   });
-
-  if (typeof onLoad === "function" && initResult.isLoaded) {
-    onLoad();
-  }
-
-  if (typeof onError === "function" && initResult.isError) {
-    onError();
-  }
 
   useIsomorphicLayoutEffect(() => {
     if (!isClientSide) {
@@ -57,7 +54,16 @@ export const useNaverMapInit: UseNaverMapInit = ({
     };
 
     initNaverMapScript();
-  }, []);
+  }, [ncpClientId]);
 
-  return initResult;
+  useIsomorphicLayoutEffect(() => {
+    if (typeof onLoad === "function" && isLoaded) {
+      onLoad();
+    }
+    if (typeof onError === "function" && isError) {
+      onError();
+    }
+  }, [isLoaded, isError, onLoad, onError]);
+
+  return { isLoaded, isError };
 };
