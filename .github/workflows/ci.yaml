@@ -1,0 +1,37 @@
+name: ci
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+          cache: yarn
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+      - name: Lint
+        run: yarn lint
+      - name: Type check
+        run: yarn type-check
+        
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Lint check
+        run: yarn lint
+
+      - name: Type check
+        run: yarn type-check
