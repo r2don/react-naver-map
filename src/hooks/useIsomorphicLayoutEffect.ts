@@ -1,5 +1,7 @@
 import { useEffect, useLayoutEffect } from "react";
+import { isClientSide } from "src/utils";
 
 // internal
-export const useIsomorphicLayoutEffect =
-  typeof window !== "undefined" ? useLayoutEffect : useEffect;
+export const useIsomorphicLayoutEffect = isClientSide
+  ? useLayoutEffect
+  : useEffect;
