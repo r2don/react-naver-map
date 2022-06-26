@@ -3,7 +3,9 @@ import { useMapContext } from "..";
 
 /**
  * A hook to handle zoom level of map
+ *
  * If you want to make custom zoom level controls, this is the hook you need
+ *
  * Make sure to use this hook inside of Map context
  */
 export const useZoom = () => {
