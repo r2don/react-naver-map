@@ -1,7 +1,9 @@
+import { AnyFunction } from "src/types";
+
 export interface InitParams {
   ncpClientId: string;
-  onLoad?: (...args: unknown[]) => unknown;
-  onError?: (...args: unknown[]) => unknown;
+  onLoad?: AnyFunction;
+  onError?: AnyFunction;
 }
 
 export interface InitResult {
