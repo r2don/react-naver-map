@@ -1,19 +1,24 @@
 import { useState } from "react";
 import { isClientSide } from "src/utils";
-import { useIsomorphicLayoutEffect } from "../useIsomorphicLayoutEffect";
 import { SCRIPT_ID } from "./constants";
-import { Result, UseNaverMapInit } from "./types";
+import { InitResult, UseNaverMapInit } from "./types";
+import { useIsomorphicLayoutEffect } from "../useIsomorphicLayoutEffect";
 import {
   insertNaverMapScriptIntoHead,
   createNaverMapScriptByClientId,
 } from "./utils";
 
+/**
+ *
+ * @param onLoad - If 'onLoad' changes too often, wrap that definition in useCallback
+ * @param onError - If 'onError' changes too often, wrap that definition in useCallback
+ */
 export const useNaverMapInit: UseNaverMapInit = ({
   ncpClientId,
   onLoad,
   onError,
 }) => {
-  const [initResult, setInitResult] = useState<Result>({
+  const [{ isLoaded, isError }, setInitResult] = useState<InitResult>({
     isLoaded: false,
     isError: false,
   });
@@ -27,7 +32,7 @@ export const useNaverMapInit: UseNaverMapInit = ({
     }
 
     const initNaverMapScript = async () => {
-      const scriptInitResult = new Promise<Result>((resolve, reject) => {
+      const scriptInitResult = new Promise<InitResult>((resolve, reject) => {
         const script = createNaverMapScriptByClientId(ncpClientId);
         insertNaverMapScriptIntoHead(script);
 
@@ -49,7 +54,16 @@ export const useNaverMapInit: UseNaverMapInit = ({
     };
 
     initNaverMapScript();
-  }, []);
+  }, [ncpClientId]);
 
-  return initResult;
+  useIsomorphicLayoutEffect(() => {
+    if (typeof onLoad === "function" && isLoaded) {
+      onLoad();
+    }
+    if (typeof onError === "function" && isError) {
+      onError();
+    }
+  }, [isLoaded, isError, onLoad, onError]);
+
+  return { isLoaded, isError };
 };

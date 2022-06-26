@@ -47,6 +47,8 @@
     "@types/navermaps": "^3.0.16",
     "eslint": "^8.18.0",
     "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-react": "^7.30.1",
+    "eslint-plugin-react-hooks": "^4.6.0",
     "jsdom": "^20.0.0",
     "prettier": "^2.7.1",
     "typescript": "^4.7.4",
