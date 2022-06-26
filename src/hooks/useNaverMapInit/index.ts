@@ -9,9 +9,12 @@ import {
 } from "./utils";
 
 /**
+ * Load naver map script with provided client id.
  *
- * @param onLoad - If 'onLoad' changes too often, wrap that definition in useCallback
- * @param onError - If 'onError' changes too often, wrap that definition in useCallback
+ * `Map` component will automatically load script. But, if you want to load naver map script in advance, you can use this hook.
+ *
+ * @param onLoad - This function will triggered when loading script finished. If 'onLoad' changes too often, wrap that definition in useCallback
+ * @param onError - This function will triggered when loading script failed. If 'onError' changes too often, wrap that definition in useCallback
  */
 export const useNaverMapInit: UseNaverMapInit = ({
   ncpClientId,

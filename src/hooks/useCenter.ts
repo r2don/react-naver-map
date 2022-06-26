@@ -4,8 +4,12 @@ import { useMapContext } from "..";
 
 /**
  * A hook to handle map center position
+ *
  * getCenter returns center coords
+ *
  * setCenter takes center coords and sets it as map center
+ *
+ * panTo takes center coords and pan to it
  */
 export const useCenter = () => {
   const map = useMapContext();
@@ -21,5 +25,11 @@ export const useCenter = () => {
     [map],
   );
 
-  return { getCenter, setCenter };
+  const panTo = useCallback(() => {
+    ({ latitude, longitude }: LatLng) => {
+      map.setCenter(new naver.maps.LatLng(latitude, longitude));
+    };
+  }, [map]);
+
+  return { getCenter, setCenter, panTo };
 };

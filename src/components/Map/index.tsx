@@ -6,6 +6,12 @@ import { MapProps } from "./type";
 
 const INITIAL_LEVEL = 5;
 
+/**
+ * Rendering a naver map
+ *
+ * This component will take className as a prop, so that you can style this component using any styling libraries.(e.g. css, styled-components, etc.)
+ *
+ */
 export const Map = ({
   children,
   center: { latitude, longitude },
