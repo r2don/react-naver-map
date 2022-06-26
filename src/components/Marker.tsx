@@ -1,6 +1,6 @@
 import { useMapContext } from "src/context";
 import { useIsomorphicLayoutEffect } from "src/hooks/useIsomorphicLayoutEffect";
-import { LatLng } from "src/interfaces/LatLng";
+import type { LatLng } from "src/interfaces/LatLng";
 
 interface MarkerProps
   extends Omit<naver.maps.MarkerOptions, "position" | "map" | "clickable"> {

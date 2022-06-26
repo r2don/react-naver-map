@@ -1,7 +1,7 @@
 export interface InitParams {
   ncpClientId: string;
-  onLoad?: () => void;
-  onError?: () => void;
+  onLoad?: VoidFunction;
+  onError?: VoidFunction;
 }
 
 export interface InitResult {
