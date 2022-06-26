@@ -1,4 +1,4 @@
-import { AnyFunction } from "src/types";
+import type { AnyFunction } from "src/types";
 
 export interface InitParams {
   ncpClientId: string;

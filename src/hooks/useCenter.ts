@@ -1,6 +1,6 @@
 import { useCallback } from "react";
-import { LatLng } from "src/interfaces/LatLng";
 import { useMapContext } from "..";
+import type { LatLng } from "src/interfaces/LatLng";
 
 /**
  * A hook to handle map center position
