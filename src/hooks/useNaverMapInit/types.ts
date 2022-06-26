@@ -1,7 +1,7 @@
 export interface InitParams {
   ncpClientId: string;
-  onLoad?: () => void;
-  onError?: () => void;
+  onLoad?: (...args: unknown[]) => unknown;
+  onError?: (...args: unknown[]) => unknown;
 }
 
 export interface InitResult {

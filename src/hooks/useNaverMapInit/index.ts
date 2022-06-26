@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { isClientSide } from "src/utils";
 import { SCRIPT_ID } from "./constants";
-import { InitResult, UseNaverMapInit } from "./types";
 import { useIsomorphicLayoutEffect } from "../useIsomorphicLayoutEffect";
 import {
   insertNaverMapScriptIntoHead,
   createNaverMapScriptByClientId,
 } from "./utils";
+import { isFunction } from "src/utils";
+import type { InitResult, UseNaverMapInit } from "./types";
 
 /**
  * Load naver map script with provided client id.
@@ -29,9 +30,11 @@ export const useNaverMapInit: UseNaverMapInit = ({
   useIsomorphicLayoutEffect(() => {
     if (!isClientSide) {
       setInitResult({ isLoaded: false, isError: false });
+      return;
     }
     if (document.getElementById(SCRIPT_ID)) {
       setInitResult({ isLoaded: true, isError: false });
+      return;
     }
 
     const initNaverMapScript = async () => {
@@ -60,10 +63,10 @@ export const useNaverMapInit: UseNaverMapInit = ({
   }, [ncpClientId]);
 
   useIsomorphicLayoutEffect(() => {
-    if (typeof onLoad === "function" && isLoaded) {
+    if (onLoad && isFunction(onLoad) && isLoaded) {
       onLoad();
     }
-    if (typeof onError === "function" && isError) {
+    if (onError && isFunction(onError) && isError) {
       onError();
     }
   }, [isLoaded, isError, onLoad, onError]);

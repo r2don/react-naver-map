@@ -1,5 +1,5 @@
 import { SCRIPT_ID } from "../constants";
-import { InitParams } from "../types";
+import type { InitParams } from "../types";
 
 export const createNaverMapScriptByClientId = (
   ncpClientId: InitParams["ncpClientId"],
