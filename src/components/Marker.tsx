@@ -5,9 +5,13 @@ import { LatLng } from "src/interfaces/LatLng";
 interface MarkerProps
   extends Omit<naver.maps.MarkerOptions, "position" | "map" | "clickable"> {
   position: LatLng;
-  onClick: () => void;
+  onClick?: () => void;
 }
-
+/**
+ * A marker component for map
+ *
+ * You can customize this marker with icon prop, see more detail here {@link https://navermaps.github.io/maps.js.ncp/docs/naver.maps.Marker.html#toc37__anchor}
+ */
 export const Marker = ({
   position: { latitude, longitude },
   onClick,
@@ -23,10 +27,15 @@ export const Marker = ({
       ...rest,
     });
 
-    const listener = marker.addListener("click", onClick);
+    let listener: naver.maps.MapEventListener;
+    if (onClick) {
+      listener = marker.addListener("click", onClick);
+    }
 
     return () => {
-      marker.removeListener(listener);
+      if (listener) {
+        marker.removeListener(listener);
+      }
       marker.setMap(null);
     };
   }, [latitude, longitude, map, rest]);
