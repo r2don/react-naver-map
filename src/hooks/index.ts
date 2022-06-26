@@ -1,2 +1,2 @@
 export * from "./useNaverMapInit";
-export * from "./useIsomorphicLayoutEffect";
+export * from "./useZoom";

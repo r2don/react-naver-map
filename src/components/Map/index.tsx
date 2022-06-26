@@ -16,20 +16,22 @@ export const Map = ({
 }: MapProps) => {
   const center = useRef(new naver.maps.LatLng(latitude, longitude));
   const ref = useRef<HTMLDivElement>(null);
-  const init = useRef(false);
+  const initializing = useRef(false);
 
   const [map, setMap] = useState<naver.maps.Map | null>(null);
+  const [init, setInit] = useState(false);
 
   useIsomorphicLayoutEffect(() => {
-    if (!ref.current || init.current || map) return;
-    init.current = true;
-    setMap(
-      new naver.maps.Map(ref.current, {
-        center: center.current,
-        zoom,
-        ...rest,
-      }),
-    );
+    if (!ref.current || initializing.current) return;
+    initializing.current = true;
+
+    const map = new naver.maps.Map(ref.current, {
+      center: center.current,
+      zoom,
+      ...rest,
+    });
+    map.addListener("init", () => setInit(true));
+    setMap(map);
   }, []);
 
   const memoizedMap = useMemo(() => {
@@ -39,7 +41,7 @@ export const Map = ({
   return (
     <div className={className} style={style} ref={ref}>
       <MapContextProvider value={memoizedMap}>
-        {map && children}
+        {init && map && children}
       </MapContextProvider>
     </div>
   );
