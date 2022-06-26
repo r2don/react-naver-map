@@ -29,7 +29,7 @@ export const Marker = ({
       marker.removeListener(listener);
       marker.setMap(null);
     };
-  }, [latitude, longitude, map]);
+  }, [latitude, longitude, map, rest]);
 
   return null;
 };
