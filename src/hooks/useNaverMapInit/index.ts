@@ -51,7 +51,7 @@ export const useNaverMapInit: UseNaverMapInit = ({
           console.warn(
             `Failed to initialize react-naver-map (${ncpClientId}).`,
           );
-          reject({ islocked: false, isError: true });
+          reject({ isLoaded: false, isError: true });
         });
       });
 
