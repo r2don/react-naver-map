@@ -1,6 +1,6 @@
 import { PositionKey, POSITION_MAP } from "src/constants";
-import { useMapContext } from "src/context";
-import { useIsomorphicLayoutEffect } from "src/hooks/useIsomorphicLayoutEffect";
+import { useMapContext } from "../../context";
+import { useIsomorphicLayoutEffect } from "../../hooks/useIsomorphicLayoutEffect";
 
 const ZOOM_SIZE = {
   LARGE: 1,
