@@ -5,6 +5,7 @@ import { useIsomorphicLayoutEffect } from "../../hooks/useIsomorphicLayoutEffect
 import type { MapProps } from "./type";
 
 const INITIAL_LEVEL = 5;
+const DEFAULT_STYLE = { width: "100%", height: "100%" };
 
 /**
  * Rendering a naver map
@@ -45,7 +46,7 @@ export const Map = ({
   }, [map]);
 
   return (
-    <div className={className} style={style} ref={ref}>
+    <div className={className} style={{ ...DEFAULT_STYLE, ...style }} ref={ref}>
       <MapContextProvider value={memoizedMap}>
         {init && map && children}
       </MapContextProvider>
