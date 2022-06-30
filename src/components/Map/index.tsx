@@ -1,7 +1,7 @@
 import React, { useMemo, useRef, useState } from "react";
 
-import { MapContextProvider } from "src/context/mapContext";
-import { useIsomorphicLayoutEffect } from "src/hooks/useIsomorphicLayoutEffect";
+import { MapContextProvider } from "../../context/mapContext";
+import { useIsomorphicLayoutEffect } from "../../hooks/useIsomorphicLayoutEffect";
 import type { MapProps } from "./type";
 
 const INITIAL_LEVEL = 5;
