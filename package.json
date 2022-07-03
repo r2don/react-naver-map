@@ -1,6 +1,6 @@
 {
   "name": "@r2don/react-naver-map",
-  "version": "0.0.3",
+  "version": "0.0.2",
   "author": {
     "name": "r2don",
     "email": "leejj2002@naver.com"
@@ -36,13 +36,13 @@
     "type-check": "tsc --pretty --noEmit"
   },
   "dependencies": {
-    "@types/uuid": "^8.3.4",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@testing-library/react": "^12.1.5",
+    "@types/uuid": "^8.3.4",
     "@types/navermaps": "^3.0.16",
     "@typescript-eslint/eslint-plugin": "^5.29.0",
     "@typescript-eslint/parser": "^5.29.0",

@@ -17,17 +17,17 @@ pnpm add @r2don/react-naver-map
 ```
 
 ## Usage
-
+> 기본 스타일이 적용되어있지 않으니, 필요에 맞게 width와 height를 적용해주세요.
 ### Map component
 
 ```js
 import { Map, useNaverMapInit, Marker } from '@r2don/react-naver-map'
 
 const MARKERS = [
-  {latitude: 30, longitude: 120},
-  {latitude: 30.5, longitude: 120.5},
-  {latitude: 31, longitude: 121},
-  {latitude: 31.5, longitude: 121.5},
+  {latitude: 37., longitude: 127},
+  {latitude: 37.5, longitude: 127.5},
+  {latitude: 38, longitude: 128},
+  {latitude: 38.5, longitude: 128.5},
 ]
 
 function App () {
@@ -36,7 +36,7 @@ function App () {
   if(!isLoaded) return null;
 
   return (
-    <Map position={{latitude: 30, longitude: 120}} style={{height: '500px', width: '500px'}}>
+    <Map center={{latitude: 37.3595704, longitude: 127.105399}} style={{height: '500px', width: '500px'}}>
       {MARKERS.map((marker) => <Marker key={JSON.stringify(marker)} position={marker} />)}
     </Map>
   );
