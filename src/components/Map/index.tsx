@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useState } from "react";
+import React, { createElement as e, useMemo, useRef, useState } from "react";
 
 import { MapContextProvider } from "../../context/mapContext";
 import { useIsomorphicLayoutEffect } from "../../hooks/useIsomorphicLayoutEffect";
@@ -13,6 +13,7 @@ const INITIAL_LEVEL = 5;
  *
  */
 export const Map = ({
+  as = "div",
   children,
   center: { latitude, longitude },
   zoom = INITIAL_LEVEL,
@@ -36,19 +37,20 @@ export const Map = ({
       zoom,
       ...rest,
     });
-    map.addListener("init", () => setInit(true));
+    map.addListener("init", () => {
+      setInit(true);
+    });
+
     setMap(map);
   }, []);
 
-  const memoizedMap = useMemo(() => {
-    return map;
-  }, [map]);
+  const memoizedMap = useMemo(() => map, [map]);
 
-  return (
-    <div className={className} style={style} ref={ref}>
-      <MapContextProvider value={memoizedMap}>
-        {init && map && children}
-      </MapContextProvider>
-    </div>
+  return e(
+    as,
+    { className, style, ref },
+    <MapContextProvider value={memoizedMap}>
+      {init && map && children}
+    </MapContextProvider>,
   );
 };
