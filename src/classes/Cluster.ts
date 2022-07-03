@@ -49,7 +49,7 @@ export class Cluster {
 
     const members = this._clusterMember;
 
-    for (let i = 0, ii = members.length; i < ii; i++) {
+    for (let i = 0; i < members.length; i++) {
       members[i].setMap(null);
     }
 

@@ -61,9 +61,6 @@ export class MarkerClustering extends naver.maps.OverlayView {
     }
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  draw() {}
-
   onRemove() {
     if (this._mapRelations) naver.maps.Event.removeListener(this._mapRelations);
 

@@ -9,6 +9,7 @@ import { Nullable } from "src/types";
 import { useMapContext } from "../context";
 import { useIsomorphicLayoutEffect } from "../hooks/useIsomorphicLayoutEffect";
 import type { LatLng } from "../interfaces/LatLng";
+import { v4 } from "uuid";
 
 interface MarkerProps
   extends Omit<naver.maps.MarkerOptions, "position" | "map" | "clickable"> {
@@ -30,7 +31,7 @@ const MarkerBase: ForwardRefRenderFunction<MarkerRef, MarkerProps> = (
   ref,
 ) => {
   const map = useMapContext();
-  const id = useMemo(() => `${new Date().toDateString()}_${Math.random()}`, []);
+  const id = useMemo(() => v4(), []);
 
   const marker = useRef<Nullable<naver.maps.Marker>>(null);
 
