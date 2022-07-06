@@ -1,4 +1,4 @@
-import { PositionKey, POSITION_MAP } from "src/constants";
+import { PositionKey, POSITION_MAP } from "../../constants";
 import { useMapContext } from "../../context";
 import { useIsomorphicLayoutEffect } from "../../hooks/useIsomorphicLayoutEffect";
 

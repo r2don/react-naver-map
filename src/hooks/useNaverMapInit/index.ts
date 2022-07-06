@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { isClientSide } from "src/utils";
+import { isClientSide } from "../../utils";
 import { SCRIPT_ID } from "./constants";
 import { useIsomorphicLayoutEffect } from "../useIsomorphicLayoutEffect";
 import {
   insertNaverMapScriptIntoHead,
   createNaverMapScriptByClientId,
 } from "./utils";
-import { isFunction } from "src/utils";
+import { isFunction } from "../../utils";
 import type { InitResult, UseNaverMapInit } from "./types";
 
 /**

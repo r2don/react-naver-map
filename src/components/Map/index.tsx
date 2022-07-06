@@ -1,8 +1,11 @@
 import React, { createElement as e, useMemo, useRef, useState } from "react";
+import { entries } from "../../utils";
 
 import { MapContextProvider } from "../../context/mapContext";
 import { useIsomorphicLayoutEffect } from "../../hooks/useIsomorphicLayoutEffect";
-import type { MapProps } from "./type";
+import type { EventHandlers, MapProps } from "./type";
+import { useEventHandlers } from "./useEventHandlers";
+import { isEventHandlerKey } from "./utils";
 
 const INITIAL_LEVEL = 5;
 
@@ -21,6 +24,21 @@ export const Map = ({
   style,
   ...rest
 }: MapProps) => {
+  const { eventHandlers, mapOptions } = entries(rest).reduce(
+    (acc, [key, value]) => {
+      if (isEventHandlerKey(key)) {
+        acc.eventHandlers[key] = value;
+      } else {
+        acc.mapOptions[key] = value;
+      }
+      return acc;
+    },
+    { mapOptions: {}, eventHandlers: {} } as {
+      mapOptions: Partial<naver.maps.MapOptions>;
+      eventHandlers: Partial<EventHandlers>;
+    },
+  );
+
   const center = useRef(new naver.maps.LatLng(latitude, longitude));
   const ref = useRef<HTMLDivElement>(null);
   const initializing = useRef(false);
@@ -35,16 +53,20 @@ export const Map = ({
     const map = new naver.maps.Map(ref.current, {
       center: center.current,
       zoom,
-      ...rest,
-    });
-    map.addListener("init", () => {
-      setInit(true);
+      ...mapOptions,
     });
 
+    const listener = map.addListener("init", () => setInit(true));
     setMap(map);
+
+    return () => {
+      map.removeListener(listener);
+    };
   }, []);
 
   const memoizedMap = useMemo(() => map, [map]);
+
+  useEventHandlers(map, eventHandlers);
 
   return e(
     as,

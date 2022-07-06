@@ -5,7 +5,7 @@ import {
   useMemo,
   useRef,
 } from "react";
-import { Nullable } from "src/types";
+import { Nullable } from "../types";
 import { useMapContext } from "../context";
 import { useIsomorphicLayoutEffect } from "../hooks/useIsomorphicLayoutEffect";
 import type { LatLng } from "../interfaces/LatLng";
