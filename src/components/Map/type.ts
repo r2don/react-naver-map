@@ -1,5 +1,11 @@
 import { ElementType, ReactElement } from "react";
-import type { ComponentBase, LatLng } from "../../interfaces";
+import type {
+  ComponentBase,
+  KeyboardEvent,
+  LatLng,
+  MouseEvent,
+  PointerEvent,
+} from "../../interfaces";
 
 interface EventHandlers {
   onClick?: (e: PointerEvent) => void;
