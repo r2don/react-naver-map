@@ -1,6 +1,6 @@
 import { entries } from "../../utils";
 import { useIsomorphicLayoutEffect } from "../../hooks/useIsomorphicLayoutEffect";
-import type { Nullable } from "../../types";
+import type { Nullable, ValueOf } from "../../types";
 import type { EventHandlers } from "./type";
 
 export const useEventHandlers = (
@@ -10,7 +10,10 @@ export const useEventHandlers = (
   useIsomorphicLayoutEffect(() => {
     if (!map) return;
 
-    const addListener = (key: string, handler: (e: any) => void) => {
+    const addListener = (
+      key: string,
+      handler: ValueOf<Required<EventHandlers>>,
+    ) => {
       return naver.maps.Event.addListener(map, key, handler);
     };
 
