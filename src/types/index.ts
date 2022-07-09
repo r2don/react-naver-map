@@ -1,2 +1,2 @@
-export * from "./anyFunction";
+export * from "./AnyFunction";
 export * from "./Nullable";

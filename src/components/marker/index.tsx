@@ -1,25 +1,15 @@
 import {
   forwardRef,
   ForwardRefRenderFunction,
+  memo,
   useImperativeHandle,
-  useMemo,
   useRef,
 } from "react";
-import { Nullable } from "src/types";
-import { useMapContext } from "../context";
-import { useIsomorphicLayoutEffect } from "../hooks/useIsomorphicLayoutEffect";
-import type { LatLng } from "../interfaces/LatLng";
-import { v4 } from "uuid";
-
-interface MarkerProps
-  extends Omit<naver.maps.MarkerOptions, "position" | "map" | "clickable"> {
-  position: LatLng;
-  onClick?: () => void;
-}
-
-export interface MarkerRef {
-  getMarker: () => { marker: Nullable<naver.maps.Marker>; id: string };
-}
+import { useMapContext } from "../../context";
+import { useIsomorphicLayoutEffect } from "../../hooks/useIsomorphicLayoutEffect";
+import { useCustomIcon, useUUIDv4 } from "./hooks";
+import type { MarkerProps, MarkerRef } from "./type";
+import type { Nullable } from "../../types";
 
 /**
  * A marker component for map
@@ -27,13 +17,20 @@ export interface MarkerRef {
  * You can customize this marker with icon prop, see more detail here {@link https://navermaps.github.io/maps.js.ncp/docs/naver.maps.Marker.html#toc37__anchor}
  */
 const MarkerBase: ForwardRefRenderFunction<MarkerRef, MarkerProps> = (
-  { position: { latitude, longitude }, onClick, ...rest }: MarkerProps,
+  {
+    position: { latitude, longitude },
+    onClick,
+    icon,
+    reactIcon,
+    ...rest
+  }: MarkerProps,
   ref,
 ) => {
   const map = useMapContext();
-  const id = useMemo(() => v4(), []);
-
   const marker = useRef<Nullable<naver.maps.Marker>>(null);
+
+  const id = useUUIDv4();
+  const customIcon = useCustomIcon(icon, reactIcon);
 
   useImperativeHandle(ref, () => ({
     getMarker: () => ({ marker: marker.current, id }),
@@ -44,6 +41,7 @@ const MarkerBase: ForwardRefRenderFunction<MarkerRef, MarkerProps> = (
       map,
       position: new naver.maps.LatLng(latitude, longitude),
       clickable: !!onClick,
+      icon: customIcon,
       ...rest,
     });
 
@@ -60,9 +58,9 @@ const MarkerBase: ForwardRefRenderFunction<MarkerRef, MarkerProps> = (
       marker.current.setMap(null);
       marker.current = null;
     };
-  }, [latitude, longitude, map, rest]);
+  }, [latitude, longitude, map, onClick, customIcon, rest]);
 
   return null;
 };
 
-export const Marker = forwardRef(MarkerBase);
+export const Marker = memo(forwardRef(MarkerBase));
