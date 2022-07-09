@@ -11,18 +11,27 @@ interface ClusterProps {
 
 export const Cluster = ({ children, options }: ClusterProps) => {
   const markersRef = useRef<Record<string, MarkerRef>>({});
+  const clusterRef = useRef<MarkerClustering>();
   const map = useMapContext();
+
   useIsomorphicLayoutEffect(() => {
-    const cluster = new MarkerClustering({
-      ...options,
-      map,
-      markers: Object.values(markersRef.current)
-        .filter((ref) => !!ref.getMarker)
-        .map((ref) => ref.getMarker().marker) as naver.maps.Marker[],
+    import("../classes/MarkerClustering").then(({ MarkerClustering }) => {
+      const cluster = new MarkerClustering({
+        ...options,
+        map,
+        markers: Object.values(markersRef.current)
+          .filter((ref) => !!ref.getMarker)
+          .map((ref) => ref.getMarker().marker) as naver.maps.Marker[],
+      });
+
+      clusterRef.current = cluster;
     });
 
     return () => {
-      cluster.onRemove();
+      if (clusterRef.current) {
+        clusterRef.current.onRemove();
+        clusterRef.current = undefined;
+      }
     };
   }, [children, map, options]);
   return (

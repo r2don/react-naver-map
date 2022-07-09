@@ -239,6 +239,9 @@ export class MarkerClustering extends naver.maps.OverlayView {
     return this.getOptions("averageCenter");
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  draw() {}
+
   /**
    * 클러스터 마커의 위치를 클러스터를 구성하고 있는 마커의 평균 좌표로 할 것인지 여부를 설정합니다.
    * @param averageCenter 평균 좌표로 클러스터링 여부
