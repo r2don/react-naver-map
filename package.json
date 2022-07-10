@@ -33,7 +33,8 @@
     "test": "vitest",
     "test:watch": "vitest --watch",
     "lint": "eslint .",
-    "type-check": "tsc --pretty --noEmit"
+    "type-check": "tsc --pretty --noEmit",
+    "clean": "rm -rf dist node_modules types"
   },
   "dependencies": {
     "react": "^17.0.2",
