@@ -2,7 +2,7 @@ import React, { cloneElement, ReactElement, Ref, useRef } from "react";
 import { useMapContext } from "../context";
 import { ClusterOptions, MarkerClustering } from "../classes";
 import { useIsomorphicLayoutEffect } from "../hooks/useIsomorphicLayoutEffect";
-import { MarkerRef } from "./Marker";
+import type { MarkerRef } from "./marker/type";
 
 interface ClusterProps {
   children: Array<ReactElement<{ ref: Ref<MarkerRef> }>>;
