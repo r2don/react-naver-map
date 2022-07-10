@@ -5,11 +5,11 @@ import {
   useMemo,
   useRef,
 } from "react";
-import { Nullable } from "../types";
 import { useMapContext } from "../context";
 import { useIsomorphicLayoutEffect } from "../hooks/useIsomorphicLayoutEffect";
-import type { LatLng } from "../interfaces/LatLng";
 import { v4 } from "uuid";
+import type { Nullable } from "../types";
+import type { LatLng } from "../interfaces/LatLng";
 
 interface MarkerProps
   extends Omit<naver.maps.MarkerOptions, "position" | "map" | "clickable"> {

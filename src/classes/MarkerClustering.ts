@@ -1,6 +1,6 @@
-import { Nullable } from "../types";
 import { Cluster } from "./Cluster";
-import { ClusterOptions, OptionKey } from "./interface";
+import type { ClusterOptions, OptionKey } from "./interface";
+import type { Nullable } from "../types";
 
 const DEFAULT_OPTIONS: ClusterOptions = {
   // 클러스터 마커를 올릴 지도입니다.

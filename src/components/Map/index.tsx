@@ -1,11 +1,10 @@
 import React, { createElement as e, useMemo, useRef, useState } from "react";
 import { entries } from "../../utils";
-
 import { MapContextProvider } from "../../context/mapContext";
 import { useIsomorphicLayoutEffect } from "../../hooks/useIsomorphicLayoutEffect";
-import type { EventHandlers, MapProps } from "./type";
 import { useEventHandlers } from "./useEventHandlers";
 import { isEventHandlerKey } from "./utils";
+import type { EventHandlers, MapProps } from "./type";
 
 const INITIAL_LEVEL = 5;
 

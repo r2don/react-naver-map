@@ -1,5 +1,5 @@
-import { Nullable } from "../types";
 import { MarkerClustering } from "./MarkerClustering";
+import type { Nullable } from "../types";
 
 /**
  * 마커를 가지고 있는 클러스터를 정의합니다.
