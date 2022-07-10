@@ -14,8 +14,7 @@
     "forceConsistentCasingInFileNames": true,
     "outDir": "./types",
     "declaration": true,
-    "jsx": "react",
-    "baseUrl": "."
+    "jsx": "react"
   },
   "include": ["src"],
   "exclude": ["node_modules", "dist"]
