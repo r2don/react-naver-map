@@ -7,7 +7,7 @@ module.exports = defineConfig({
       entry: path.resolve(__dirname, "src/index.ts"),
       name: "@r2don/react-naver-map",
       fileName: (format) => `index.${format}.js`,
-      formats: ["es", "umd"],
+      formats: ["es", "cjs"],
     },
     minify: "esbuild",
     rollupOptions: {
