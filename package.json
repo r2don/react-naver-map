@@ -37,8 +37,6 @@
     "clean": "rm -rf dist node_modules types"
   },
   "dependencies": {
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
@@ -59,7 +57,7 @@
     "vitest": "^0.16.0"
   },
   "peerDependencies": {
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react": ">=16.8",
+    "react-dom": ">=16.8"
   }
 }
