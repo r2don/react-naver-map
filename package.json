@@ -60,6 +60,7 @@
   },
   "peerDependencies": {
     "react": ">=16.8",
-    "react-dom": ">=16.8"
+    "react-dom": ">=16.8",
+    "@types/navermaps": ">=3.0.16"
   }
 }
