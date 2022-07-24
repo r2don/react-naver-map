@@ -31,9 +31,11 @@ export const Cluster = ({ children, options }: ClusterProps) => {
       if (clusterRef.current) {
         clusterRef.current.onRemove();
         clusterRef.current = undefined;
+        markersRef.current = {};
       }
     };
   }, [children, map, options]);
+
   return (
     <>
       {children.map((child) =>
