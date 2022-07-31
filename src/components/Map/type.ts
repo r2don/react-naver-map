@@ -26,7 +26,7 @@ interface EventHandlers {
 
 interface MapProps extends naver.maps.MapOptions, ComponentBase, EventHandlers {
   as?: ElementType;
-  center: LatLng;
+  center?: LatLng;
   children?: ReactElement;
 }
 
