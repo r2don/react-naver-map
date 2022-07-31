@@ -17,7 +17,7 @@ const INITIAL_LEVEL = 5;
 export const Map = ({
   as = "div",
   children,
-  center: { latitude, longitude },
+  center = { latitude: 37.566535, longitude: 126.977969 },
   zoom = INITIAL_LEVEL,
   className,
   style,
@@ -38,7 +38,9 @@ export const Map = ({
     },
   );
 
-  const center = useRef(new naver.maps.LatLng(latitude, longitude));
+  const { latitude, longitude } = center;
+
+  const centerRef = useRef(new naver.maps.LatLng(latitude, longitude));
   const ref = useRef<HTMLDivElement>(null);
   const initializing = useRef(false);
 
@@ -50,7 +52,7 @@ export const Map = ({
     initializing.current = true;
 
     const map = new naver.maps.Map(ref.current, {
-      center: center.current,
+      center: centerRef.current,
       zoom,
       ...mapOptions,
     });
@@ -60,6 +62,7 @@ export const Map = ({
 
     return () => {
       map.removeListener(listener);
+      map.destroy();
     };
   }, []);
 

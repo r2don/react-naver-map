@@ -6,7 +6,7 @@ import type { MarkerRef } from "./marker/type";
 
 interface ClusterProps {
   children: Array<ReactElement<{ ref: Ref<MarkerRef> }>>;
-  options?: Omit<ClusterOptions, "map" | "markers">;
+  options?: Omit<Partial<ClusterOptions>, "map" | "markers">;
 }
 
 export const Cluster = ({ children, options }: ClusterProps) => {
