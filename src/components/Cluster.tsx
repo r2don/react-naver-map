@@ -16,6 +16,7 @@ export const Cluster = ({ children, options }: ClusterProps) => {
 
   useIsomorphicLayoutEffect(() => {
     import("../classes/MarkerClustering").then(({ MarkerClustering }) => {
+      if (clusterRef.current) return;
       const cluster = new MarkerClustering({
         ...options,
         map,

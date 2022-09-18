@@ -25,11 +25,12 @@ export const useCenter = () => {
     [map],
   );
 
-  const panTo = useCallback(() => {
+  const panTo = useCallback(
     ({ latitude, longitude }: LatLng) => {
       map.setCenter(new naver.maps.LatLng(latitude, longitude));
-    };
-  }, [map]);
+    },
+    [map],
+  );
 
   return { getCenter, setCenter, panTo };
 };
