@@ -31,10 +31,7 @@ export const useNaverMapInit: UseNaverMapInit = ({
       setInitResult({ isLoaded: false, isError: false });
       return;
     }
-    if (document.getElementById(SCRIPT_ID)) {
-      setInitResult({ isLoaded: true, isError: false });
-      return;
-    }
+    if (document.getElementById(SCRIPT_ID)) return;
 
     const initNaverMapScript = async () => {
       const scriptInitResult = new Promise<InitResult>((resolve, reject) => {
