@@ -61,6 +61,10 @@ export const Map = ({
     setMap(map);
 
     return () => {
+      if (initializing.current) {
+        initializing.current = false;
+        return;
+      }
       map.removeListener(listener);
       map.destroy();
     };
