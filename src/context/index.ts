@@ -1,1 +1,1 @@
-export { useMapContext } from "./mapContext";
+export * from "./mapContext";
