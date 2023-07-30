@@ -7,7 +7,7 @@ export const createNaverMapScriptByClientId = (
   const script = document.createElement("script");
   script.id = SCRIPT_ID;
   script.type = "text/javascript";
-  script.src = `https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${ncpClientId}`;
+  script.src = `https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${ncpClientId}`;
 
   return script;
 };
