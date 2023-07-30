@@ -18,6 +18,7 @@ import type { InitResult, UseNaverMapInit } from "./types";
  */
 export const useNaverMapInit: UseNaverMapInit = ({
   ncpClientId,
+  submodules,
   onLoad,
   onError,
 }) => {
@@ -35,7 +36,7 @@ export const useNaverMapInit: UseNaverMapInit = ({
 
     const initNaverMapScript = async () => {
       const scriptInitResult = new Promise<InitResult>((resolve, reject) => {
-        const script = createNaverMapScriptByClientId(ncpClientId);
+        const script = createNaverMapScriptByClientId({ ncpClientId, submodules });
         insertNaverMapScriptIntoHead(script);
 
         script.addEventListener("load", function () {
