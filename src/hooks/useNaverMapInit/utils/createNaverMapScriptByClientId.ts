@@ -14,7 +14,7 @@ export const createNaverMapScriptByClientId = ({
 
   script.id = SCRIPT_ID;
   script.type = "text/javascript";
-  script.src = `https://openapi.map.naver.com/openapi/v3/maps.js?${paramsString}`;
+  script.src = `https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${ncpClientId}`;
 
   return script;
 };

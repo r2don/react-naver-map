@@ -40,13 +40,13 @@ export const useNaverMapInit: UseNaverMapInit = ({
         insertNaverMapScriptIntoHead(script);
 
         script.addEventListener("load", function () {
-          console.info(`Initialized react-naver-map ${ncpClientId}`);
+          console.info('Initialized react-naver-map.');
           resolve({ isLoaded: true, isError: false });
         });
 
         script.addEventListener("error", function () {
           console.warn(
-            `Failed to initialize react-naver-map (${ncpClientId}).`,
+            'Failed to initialize react-naver-map.',
           );
           reject({ isLoaded: false, isError: true });
         });
