@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { isClientSide, isFunction } from "../../utils";
-import { SCRIPT_ID } from "./constants";
 import { useIsomorphicLayoutEffect } from "../useIsomorphicLayoutEffect";
-import {
-  insertNaverMapScriptIntoHead,
-  createNaverMapScriptByClientId,
-} from "./utils";
+import { SCRIPT_ID } from "./constants";
 import type { InitResult, UseNaverMapInit } from "./types";
+import {
+  createNaverMapScriptByClientId,
+  insertNaverMapScriptIntoHead,
+} from "./utils";
 
 /**
  * Load naver map script with provided client id.
@@ -32,22 +32,27 @@ export const useNaverMapInit: UseNaverMapInit = ({
       setInitResult({ isLoaded: false, isError: false });
       return;
     }
-    if (document.getElementById(SCRIPT_ID)) return;
+    if (document.getElementById(SCRIPT_ID)) {
+      setInitResult({ isLoaded: true, isError: false });
+      return;
+    }
 
     const initNaverMapScript = async () => {
       const scriptInitResult = new Promise<InitResult>((resolve, reject) => {
-        const script = createNaverMapScriptByClientId({ ncpClientId, submodules });
+        const script = createNaverMapScriptByClientId({
+          ncpClientId,
+          submodules,
+        });
         insertNaverMapScriptIntoHead(script);
 
         script.addEventListener("load", function () {
-          console.info('Initialized react-naver-map.');
+          console.info("react-naver-map is initialized ");
           resolve({ isLoaded: true, isError: false });
         });
 
         script.addEventListener("error", function () {
-          console.warn(
-            'Failed to initialize react-naver-map.',
-          );
+          console.warn("Failed to initialize react-naver-map.");
+          document.getElementById(SCRIPT_ID)?.remove();
           reject({ isLoaded: false, isError: true });
         });
       });
