@@ -32,7 +32,7 @@ export const useNaverMapInit: UseNaverMapInit = ({
       setInitResult({ isLoaded: false, isError: false });
       return;
     }
-    if (document.getElementById(SCRIPT_ID)) {
+    if (document.getElementById(SCRIPT_ID) && Boolean(window?.naver.maps)) {
       setInitResult({ isLoaded: true, isError: false });
       return;
     }
