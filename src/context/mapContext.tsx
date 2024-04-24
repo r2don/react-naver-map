@@ -1,19 +1,35 @@
-import React, { createContext, ReactNode, useContext } from "react";
+import React, {
+  createContext,
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
-type MapContext = naver.maps.Map | null;
+interface MapContext {
+  map: naver.maps.Map | null;
+  setMap: Dispatch<SetStateAction<naver.maps.Map | null>> | null;
+}
 
-const mapContext = createContext<MapContext>(null);
+export const mapContext = createContext<MapContext>({
+  map: null,
+  setMap: null,
+});
 
 interface MapContextProviderProps {
   children: ReactNode;
-  value: MapContext;
 }
 
-export const MapContextProvider = ({
-  children,
-  value,
-}: MapContextProviderProps) => {
-  return <mapContext.Provider value={value}>{children}</mapContext.Provider>;
+export const MapContextProvider = ({ children }: MapContextProviderProps) => {
+  const [map, setMap] = useState<naver.maps.Map | null>(null);
+
+  return (
+    <mapContext.Provider value={{ map, setMap }}>
+      {children}
+    </mapContext.Provider>
+  );
 };
 
 /**
@@ -22,8 +38,8 @@ export const MapContextProvider = ({
  * Make sure to use this inside of `map context` which provided by `Map` component
  */
 export const useMapContext = () => {
-  const map = useContext(mapContext);
-  if (!map) throw new Error("map is not accessible");
+  const { map, setMap } = useContext(mapContext);
+  if (!setMap && !map) throw Error("MapContextProvider is required");
 
   return map;
 };
