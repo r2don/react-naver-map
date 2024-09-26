@@ -1,5 +1,6 @@
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import { useMapContext } from "../context";
+import { useIsomorphicLayoutEffect } from "../hooks/useIsomorphicLayoutEffect";
 
 interface PolylineProps {
   path: { latitude: number; longitude: number }[];
@@ -13,7 +14,7 @@ interface PolylineProps {
  * Set polyline into Map obejct without rendering anything in VirtualDOM
  * @returns <></>
  */
-const Polyline: React.FC<PolylineProps> = ({
+const Polyline = ({
   path,
   strokeColor = "#FF0000",
   strokeWeight = 4,
@@ -23,7 +24,7 @@ const Polyline: React.FC<PolylineProps> = ({
   const map = useMapContext();
   const polylineRef = useRef<naver.maps.Polyline | null>(null);
 
-  useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     if (!map) return;
 
     const polylinePath = path.map(
