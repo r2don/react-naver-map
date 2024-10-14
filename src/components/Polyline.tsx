@@ -14,7 +14,7 @@ interface PolylineProps {
  * Set polyline into Map obejct without rendering anything in VirtualDOM
  * @returns <></>
  */
-const Polyline = ({
+export const Polyline = ({
   path,
   strokeColor = "#FF0000",
   strokeWeight = 4,
@@ -49,5 +49,3 @@ const Polyline = ({
 
   return <></>;
 };
-
-export default Polyline;
