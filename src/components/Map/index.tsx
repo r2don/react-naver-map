@@ -1,10 +1,10 @@
-import React, { createElement as e, useMemo, useRef, useState } from "react";
+import { createElement as e, useContext, useRef } from "react";
 import { entries } from "../../utils";
-import { MapContextProvider } from "../../context/mapContext";
 import { useIsomorphicLayoutEffect } from "../../hooks/useIsomorphicLayoutEffect";
 import { useEventHandlers } from "./useEventHandlers";
 import { isEventHandlerKey } from "./utils";
 import type { EventHandlers, MapProps } from "./type";
+import { mapContext } from "../..";
 
 const INITIAL_LEVEL = 5;
 
@@ -44,9 +44,7 @@ export const Map = ({
   const ref = useRef<HTMLDivElement>(null);
   const initializing = useRef(false);
 
-  const [map, setMap] = useState<naver.maps.Map | null>(null);
-  const [init, setInit] = useState(false);
-
+  const { map, setMap } = useContext(mapContext);
   useIsomorphicLayoutEffect(() => {
     if (!ref.current || initializing.current) return;
     initializing.current = true;
@@ -56,29 +54,17 @@ export const Map = ({
       zoom,
       ...mapOptions,
     });
-
-    const listener = map.addListener("init", () => setInit(true));
-    setMap(map);
-
+    setMap?.(map);
     return () => {
       if (initializing.current) {
         initializing.current = false;
         return;
       }
-      map.removeListener(listener);
       map.destroy();
     };
   }, []);
 
-  const memoizedMap = useMemo(() => map, [map]);
-
   useEventHandlers(map, eventHandlers);
 
-  return e(
-    as,
-    { className, style, ref },
-    <MapContextProvider value={memoizedMap}>
-      {init && map && children}
-    </MapContextProvider>,
-  );
+  return e(as, { className, style, ref }, children);
 };
