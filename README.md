@@ -54,7 +54,7 @@ function App() {
 ### PolyLine Component
 
 ```js
-import { Map, useNaverMapInit, Marker, Poly } from "@r2don/react-naver-map";
+import { Map, useNaverMapInit, Marker, Polyline } from "@r2don/react-naver-map";
 
 const MARKERS = [
   { latitude: 37, longitude: 127 },
