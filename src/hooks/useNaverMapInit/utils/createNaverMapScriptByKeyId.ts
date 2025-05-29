@@ -1,12 +1,12 @@
 import { SCRIPT_ID } from "../constants";
 import type { InitParams } from "../types";
 
-export const createNaverMapScriptByClientId = ({
-  ncpClientId,
+export const createNaverMapScriptByKeyId = ({
+  ncpKeyId,
   submodules,
-}: Pick<InitParams, "ncpClientId" | "submodules">) => {
+}: Pick<InitParams, "ncpKeyId" | "submodules">) => {
   const script = document.createElement("script");
-  let paramsString = `ncpClientId=${ncpClientId}`;
+  let paramsString = `ncpKeyId=${ncpKeyId}`;
 
   if (submodules?.length) {
     paramsString = paramsString.concat(`&submodules=${submodules.join(",")}`);

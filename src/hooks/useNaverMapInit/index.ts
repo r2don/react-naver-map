@@ -4,7 +4,7 @@ import { useIsomorphicLayoutEffect } from "../useIsomorphicLayoutEffect";
 import { SCRIPT_ID } from "./constants";
 import type { InitResult, UseNaverMapInit } from "./types";
 import {
-  createNaverMapScriptByClientId,
+  createNaverMapScriptByKeyId,
   insertNaverMapScriptIntoHead,
 } from "./utils";
 
@@ -17,7 +17,7 @@ import {
  * @param onError - This function will triggered when loading script failed. If 'onError' changes too often, wrap that definition in useCallback
  */
 export const useNaverMapInit: UseNaverMapInit = ({
-  ncpClientId,
+  ncpKeyId,
   submodules,
   onLoad,
   onError,
@@ -39,8 +39,8 @@ export const useNaverMapInit: UseNaverMapInit = ({
 
     const initNaverMapScript = async () => {
       const scriptInitResult = new Promise<InitResult>((resolve, reject) => {
-        const script = createNaverMapScriptByClientId({
-          ncpClientId,
+        const script = createNaverMapScriptByKeyId({
+          ncpKeyId: ncpKeyId,
           submodules,
         });
         insertNaverMapScriptIntoHead(script);
@@ -62,7 +62,7 @@ export const useNaverMapInit: UseNaverMapInit = ({
     };
 
     initNaverMapScript();
-  }, [ncpClientId]);
+  }, [ncpKeyId]);
 
   useIsomorphicLayoutEffect(() => {
     if (onLoad && isFunction(onLoad) && isLoaded) {

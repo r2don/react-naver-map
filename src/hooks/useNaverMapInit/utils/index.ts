@@ -1,2 +1,2 @@
-export * from "./createNaverMapScriptByClientId";
+export * from "./createNaverMapScriptByKeyId";
 export * from "./insertNaverMapScriptIntoHead";
