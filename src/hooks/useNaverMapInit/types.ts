@@ -1,5 +1,5 @@
 export interface InitParams {
-  ncpClientId: string;
+  ncpKeyId: string;
   submodules?: Submodule[]
   onLoad?: VoidFunction;
   onError?: VoidFunction;
